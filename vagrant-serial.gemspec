@@ -4,8 +4,8 @@ require File.expand_path('../lib/vagrant-serial/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Anton Mironov"]
   gem.email         = ["ant.mironov@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Vagrant plugin to configure serial-ports in vms}
+  gem.summary       = %q{}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
