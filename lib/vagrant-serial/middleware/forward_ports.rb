@@ -1,7 +1,7 @@
 module Vagrant
   module Serial
     module Middleware
-      class Forward
+      class ForwardPorts
         def initialize(app, env)
           @app = app
         end

@@ -1,7 +1,7 @@
 module Vagrant
   module Serial
     module Middleware
-      class Configure
+      class ConfigurePorts
         def initialize(app, env)
           @app = app
         end

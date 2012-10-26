@@ -1,0 +1,17 @@
+module Vagrant
+  module Serial
+    module Middleware
+      class ClearForwardedPorts
+        def initialize(app, env)
+          @app = app
+        end
+
+        def call(env)
+          `/sbin/start-stop-daemon --stop --quiet --pidfile #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com1.pid --exec /usr/bin/socat && rm #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com1.pid`
+          `/sbin/start-stop-daemon --stop --quiet --pidfile #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com2.pid --exec /usr/bin/socat && rm #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com2.pid`
+          @app.call(env)
+        end
+      end
+    end
+  end
+end
