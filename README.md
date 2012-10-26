@@ -16,6 +16,12 @@ Or install it yourself as:
 
     $ gem install vagrant-serial
 
+## To Do
+
+1. Good readme file
+2. Add logging
+3. Traverse ports
+
 ## Usage
 
 TODO: Write usage instructions here
