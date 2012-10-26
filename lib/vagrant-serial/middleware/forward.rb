@@ -7,8 +7,8 @@ module Vagrant
         end
 
         def call(env)
-          env[:vm].channel.execute("socat tcp-l:30001,reuseaddr,fork UNIX-CONNECT:$HOME/serial/#{env[:vm].id}-com1 &")
-          env[:vm].channel.execute("socat tcp-l:30002,reuseaddr,fork UNIX-CONNECT:$HOME/serial/#{env[:vm].id}-com2 &")
+          env[:vm].channel.execute("socat tcp-l:30001,reuseaddr,fork UNIX-CONNECT:$HOME/serial/#{env[:vm].uuid}-com1 &")
+          env[:vm].channel.execute("socat tcp-l:30002,reuseaddr,fork UNIX-CONNECT:$HOME/serial/#{env[:vm].uuid}-com2 &")
           @app.call(env)
         end
       end
