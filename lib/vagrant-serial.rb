@@ -1,4 +1,3 @@
-
 require "vagrant"
 require "vagrant-serial/version"
 require "vagrant-serial/middleware/configure_ports"
