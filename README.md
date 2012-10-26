@@ -21,6 +21,7 @@ Or install it yourself as:
 1. Good readme file
 2. Add logging
 3. Traverse ports
+4. Make configurable: range of ports, path to sockets
 
 ## Usage
 
