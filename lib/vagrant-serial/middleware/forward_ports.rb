@@ -7,8 +7,14 @@ module Vagrant
         end
 
         def call(env)
-          `/sbin/start-stop-daemon --quiet --start --pidfile #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com1.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:30001,reuseaddr,fork UNIX-CONNECT:#{ENV['HOME']}/serial/#{env[:vm].uuid}-com1`
-          `/sbin/start-stop-daemon --quiet --start --pidfile #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com2.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:30002,reuseaddr,fork UNIX-CONNECT:#{ENV['HOME']}/serial/#{env[:vm].uuid}-com2`
+          if env[:vm].config.serial.forward_com1
+            `/sbin/start-stop-daemon --quiet --start --pidfile #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com1.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:#{env[:vm].config.serial.forward_com1},reuseaddr,fork UNIX-CONNECT:#{ENV['HOME']}/serial/#{env[:vm].uuid}-com1`
+          end
+
+          if env[:vm].config.serial.forward_com2
+            `/sbin/start-stop-daemon --quiet --start --pidfile #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com2.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:#{env[:vm].config.serial.forward_com2},reuseaddr,fork UNIX-CONNECT:#{ENV['HOME']}/serial/#{env[:vm].uuid}-com2`
+          end
+
           @app.call(env)
         end
       end
