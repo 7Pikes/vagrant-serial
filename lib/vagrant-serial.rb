@@ -5,6 +5,8 @@ require "vagrant-serial/middleware/configure_ports"
 require "vagrant-serial/middleware/forward_ports"
 require "vagrant-serial/middleware/clear_forwarded_ports"
 
+require "fileutils"
+
 Vagrant.config_keys.register(:serial) { Vagrant::Serial::Config }
 
 Vagrant.actions[:start].insert_after Vagrant::Action::VM::Customize, Vagrant::Serial::Middleware::ConfigurePorts

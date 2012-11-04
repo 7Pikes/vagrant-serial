@@ -7,12 +7,14 @@ module Vagrant
         end
 
         def call(env)
+          FileUtils.mkdir_p(env[:vm].config.sockets_path) if !File.directory?(env[:vm].config.sockets_path)
+
           if env[:vm].config.serial.forward_com1
-            `/sbin/start-stop-daemon --stop --quiet --pidfile #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com1.pid --exec /usr/bin/socat && rm #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com1.pid`
+            `/sbin/start-stop-daemon --stop --quiet --pidfile #{env[:vm].config.sockets_path}/socat.#{env[:vm].uuid}-com1.pid --exec /usr/bin/socat && rm #{env[:vm].config.sockets_path}/socat.#{env[:vm].uuid}-com1.pid`
           end
 
           if env[:vm].config.serial.forward_com2
-            `/sbin/start-stop-daemon --stop --quiet --pidfile #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com2.pid --exec /usr/bin/socat && rm #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com2.pid`
+            `/sbin/start-stop-daemon --stop --quiet --pidfile #{env[:vm].config.sockets_path}/socat.#{env[:vm].uuid}-com2.pid --exec /usr/bin/socat && rm #{env[:vm].config.sockets_path}/socat.#{env[:vm].uuid}-com2.pid`
           end
 
           @app.call(env)

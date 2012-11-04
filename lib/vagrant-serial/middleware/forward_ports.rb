@@ -7,12 +7,14 @@ module Vagrant
         end
 
         def call(env)
+          FileUtils.mkdir_p(env[:vm].config.sockets_path) if !File.directory?(env[:vm].config.sockets_path)
+
           if env[:vm].config.serial.forward_com1
-            `/sbin/start-stop-daemon --quiet --start --pidfile #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com1.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:#{env[:vm].config.serial.forward_com1},reuseaddr,fork UNIX-CONNECT:#{ENV['HOME']}/serial/#{env[:vm].uuid}-com1`
+            `/sbin/start-stop-daemon --quiet --start --pidfile #{env[:vm].config.sockets_path}/socat.#{env[:vm].uuid}-com1.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:#{env[:vm].config.serial.forward_com1},reuseaddr,fork UNIX-CONNECT:#{env[:vm].config.sockets_path}/#{env[:vm].uuid}-com1`
           end
 
           if env[:vm].config.serial.forward_com2
-            `/sbin/start-stop-daemon --quiet --start --pidfile #{ENV['HOME']}/serial/socat.#{env[:vm].uuid}-com2.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:#{env[:vm].config.serial.forward_com2},reuseaddr,fork UNIX-CONNECT:#{ENV['HOME']}/serial/#{env[:vm].uuid}-com2`
+            `/sbin/start-stop-daemon --quiet --start --pidfile #{env[:vm].config.sockets_path}/socat.#{env[:vm].uuid}-com2.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:#{env[:vm].config.serial.forward_com2},reuseaddr,fork UNIX-CONNECT:#{env[:vm].config.sockets_path}/#{env[:vm].uuid}-com2`
           end
 
           @app.call(env)
