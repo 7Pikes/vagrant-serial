@@ -6,7 +6,7 @@ module Vagrant
       attr_accessor :sockets_path
 
       def sockets_path
-        @sockets_path.nil? ? (@sockets_path = "#{ENV["VAGRANT_HOME"]}/serial") : @sockets_path
+        @sockets_path.nil? ? (@sockets_path = "#{DEFAULT_HOME}/serial") : @sockets_path
       end
 
       def validate(env, errors)
