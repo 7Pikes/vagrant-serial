@@ -6,7 +6,7 @@ module Vagrant
       attr_accessor :sockets_path
 
       def sockets_path
-        @sockets_path.nil? ? (@sockets_path = "#{Vagrant::Environment::DEFAULT_HOME}/serial") : @sockets_path
+        @sockets_path.nil? ? (@sockets_path = "#{File.expand_path(Vagrant::Environment::DEFAULT_HOME)}/serial") : @sockets_path
       end
 
       def set?
