@@ -12,10 +12,12 @@ module Vagrant
 
             if env[:vm].config.serial.forward_com1
               `/sbin/start-stop-daemon --quiet --start --pidfile #{env[:vm].config.serial.sockets_path}/socat.#{env[:vm].uuid}-com1.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:#{env[:vm].config.serial.forward_com1},reuseaddr,fork UNIX-CONNECT:#{env[:vm].config.serial.sockets_path}/#{env[:vm].uuid}-com1`
+              env[:ui].success "COM1 => #{env[:vm].config.serial.forward_com1}"
             end
 
             if env[:vm].config.serial.forward_com2
               `/sbin/start-stop-daemon --quiet --start --pidfile #{env[:vm].config.serial.sockets_path}/socat.#{env[:vm].uuid}-com2.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:#{env[:vm].config.serial.forward_com2},reuseaddr,fork UNIX-CONNECT:#{env[:vm].config.serial.sockets_path}/#{env[:vm].uuid}-com2`
+              env[:ui].success "COM2 => #{env[:vm].config.serial.forward_com2}"
             end
           end
 

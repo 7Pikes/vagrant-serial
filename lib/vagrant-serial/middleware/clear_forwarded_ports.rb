@@ -10,6 +10,7 @@ module Vagrant
           if env[:vm].config.serial.set?
             FileUtils.mkdir_p(env[:vm].config.serial.sockets_path) if !File.directory?(env[:vm].config.serial.sockets_path)
 
+            env[:ui].success "Stopping serial ports forwarding..."
             if env[:vm].config.serial.forward_com1
               `/sbin/start-stop-daemon --stop --quiet --pidfile #{env[:vm].config.serial.sockets_path}/socat.#{env[:vm].uuid}-com1.pid --exec /usr/bin/socat && rm #{env[:vm].config.serial.sockets_path}/socat.#{env[:vm].uuid}-com1.pid`
             end
