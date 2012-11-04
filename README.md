@@ -1,34 +1,30 @@
 # Vagrant::Serial
 
-TODO: Write a gem description
+Vagrant::Serial allows to configure serial ports forwarding with Vagrant.
+Tested with vagrant version 1.0.5.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+    $ vagrant gem install vagrant-serial
 
-    gem 'vagrant-serial'
+## Configuration
 
-And then execute:
+There is an restriction in VertualBox that you can use only 2 serial ports.
+So the basic `Vagrantfile` would look like this:
 
-    $ bundle
+```ruby
+Vagrant::Config.run do |config|
+  # Map COM1 port in virtual machine to 1024 port on the host
+  config.serial.forward_com1 = 1024
 
-Or install it yourself as:
+  # Map COM2 port in virtual machine to 1025 port on the host
+  config.serial.forward_com2 = 1025
 
-    $ gem install vagrant-serial
+  # Default: ~/.vagrant.d/serial
+  # Override sockets path
+  # config.serial.sockets_path = "/path/to/sockets/dir"
+end
+```
 
-## To Do
-
-1. Good readme file
-2. Add logging
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+## Copyright
+Copyright (c) 2012 Anton Mironov and 7 Pikes, Inc.
