@@ -9,8 +9,9 @@ Tested with vagrant version 1.0.5.
 
 ## Configuration
 
-There is an restriction in VertualBox that you can use only 2 serial ports.
-So the basic `Vagrantfile` would look like this:
+There is a restriction in VirtualBox that you can use only 2 serial ports.
+
+The basic `Vagrantfile` will look like this:
 
 ```ruby
 Vagrant::Config.run do |config|
@@ -20,8 +21,8 @@ Vagrant::Config.run do |config|
   # Map COM2 port in virtual machine to 1025 port on the host
   config.serial.forward_com2 = 1025
 
-  # Default: ~/.vagrant.d/serial
   # Override sockets path
+  # Default: ~/.vagrant.d/serial
   # config.serial.sockets_path = "/path/to/sockets/dir"
 end
 ```
