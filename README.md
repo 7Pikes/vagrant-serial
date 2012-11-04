@@ -1,6 +1,6 @@
 # Vagrant::Serial
 
-Vagrant::Serial allows to configure serial ports forwarding with Vagrant.
+Vagrant::Serial allows you to configure serial ports forwarding with Vagrant.
 Tested with vagrant version 1.0.5.
 
 ## Installation
