@@ -27,5 +27,9 @@ Vagrant::Config.run do |config|
 end
 ```
 
+## Requirements
+- Ubuntu or Debian Linux (or manually install /sbin/start-stop-daemon)
+- /usr/bin/socat (use apt-get install socat for Ubuntu/Debian)
+
 ## Copyright
-Copyright (c) 2012 Anton Mironov and 7 Pikes, Inc.
+Copyright (c) 2012 Anton Mironov, Alexey Zagarin and 7 Pikes, Inc.
