@@ -2,8 +2,9 @@ require "vagrant"
 require "vagrant-serial/config"
 require "vagrant-serial/version"
 require "vagrant-serial/middleware/configure_ports"
-require "vagrant-serial/middleware/forward_ports"
-require "vagrant-serial/middleware/clear_forwarded_ports"
+require "vagrant-serial/middleware/clear_configured_ports"
+require "vagrant-serial/middleware/start_forwarding_ports"
+require "vagrant-serial/middleware/stop_forwarding_ports"
 
 require "fileutils"
 
