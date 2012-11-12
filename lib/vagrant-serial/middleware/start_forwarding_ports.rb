@@ -1,7 +1,7 @@
 module Vagrant
   module Serial
     module Middleware
-      class ForwardPorts
+      class StartForwardingPorts
         def initialize(app, env)
           @app = app
         end
@@ -9,6 +9,8 @@ module Vagrant
         def call(env)
           if env[:vm].config.serial.set?
             FileUtils.mkdir_p(env[:vm].config.serial.sockets_path) if !File.directory?(env[:vm].config.serial.sockets_path)
+
+            env[:ui].info "Starting serial ports forwarding..."
 
             if env[:vm].config.serial.forward_com1
               `/sbin/start-stop-daemon --quiet --start --pidfile #{env[:vm].config.serial.sockets_path}/socat.#{env[:vm].uuid}-com1.pid --background --make-pidfile --exec /usr/bin/socat -- tcp-l:#{env[:vm].config.serial.forward_com1},reuseaddr,fork UNIX-CONNECT:#{env[:vm].config.serial.sockets_path}/#{env[:vm].uuid}-com1`

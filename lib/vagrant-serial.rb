@@ -9,10 +9,10 @@ require "fileutils"
 
 Vagrant.config_keys.register(:serial) { Vagrant::Serial::Config }
 
-Vagrant.actions[:start].insert_after Vagrant::Action::VM::Customize, Vagrant::Serial::Middleware::ClearForwardedPorts
 Vagrant.actions[:start].insert_after Vagrant::Action::VM::Customize, Vagrant::Serial::Middleware::ConfigurePorts
-Vagrant.actions[:start].insert_after Vagrant::Action::VM::Boot, Vagrant::Serial::Middleware::ForwardPorts
+Vagrant.actions[:start].insert_after Vagrant::Action::VM::Customize, Vagrant::Serial::Middleware::ClearConfiguredPorts
+Vagrant.actions[:start].insert_after Vagrant::Action::VM::Boot, Vagrant::Serial::Middleware::StartForwardingPorts
 
-Vagrant.actions[:resume].insert_after Vagrant::Action::VM::Resume, Vagrant::Serial::Middleware::ForwardPorts
-Vagrant.actions[:halt].insert_after Vagrant::Action::VM::CheckAccessible, Vagrant::Serial::Middleware::ClearForwardedPorts
-Vagrant.actions[:suspend].insert_after Vagrant::Action::VM::CheckAccessible, Vagrant::Serial::Middleware::ClearForwardedPorts
+Vagrant.actions[:resume].insert_after Vagrant::Action::VM::Resume, Vagrant::Serial::Middleware::StartForwardingPorts
+Vagrant.actions[:halt].insert_after Vagrant::Action::VM::CheckAccessible, Vagrant::Serial::Middleware::StopForwardingPorts
+Vagrant.actions[:suspend].insert_after Vagrant::Action::VM::CheckAccessible, Vagrant::Serial::Middleware::StopForwardingPorts

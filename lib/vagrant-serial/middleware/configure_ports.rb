@@ -10,7 +10,7 @@ module Vagrant
           if env[:vm].config.serial.set?
             FileUtils.mkdir_p(env[:vm].config.serial.sockets_path) if !File.directory?(env[:vm].config.serial.sockets_path)
 
-            env[:ui].info "Setting up serial ports..."
+            env[:ui].info "Configuring serial ports..."
             if env[:vm].config.serial.forward_com1
               command = ["modifyvm", env[:vm].uuid, "--uart1", "0x3F8", "4", "--uartmode1", "server", "#{env[:vm].config.serial.sockets_path}/#{env[:vm].uuid}-com1"]
               env[:vm].driver.execute_command(command)
