@@ -33,3 +33,5 @@ end
 
 ## Copyright
 Copyright (c) 2012 Anton Mironov, Alexey Zagarin and 7 Pikes, Inc.
+
+![7pikes logo](https://github.com/wiki/7Pikes/vagrant-serial/Logo.png)
